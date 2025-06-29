@@ -1,0 +1,45 @@
+# Application Configuration
+app:
+  name: "In-Memory Database CLI"
+  version: "1.0.0"
+  description: "A command-line interface for an in-memory database with transaction support"
+
+# Logging Configuration
+logging:
+  type: "composite"  # console, file, composite
+  level: "INFO"  # DEBUG, INFO, WARNING, ERROR
+  file:
+    enabled: true
+    path: "logs"
+    filename_pattern: "db_{date}.log"
+    max_size: "10MB"
+    backup_count: 7
+  console:
+    enabled: true
+    level: "INFO"
+  format:
+    file: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+    console: "%(levelname)s: %(message)s"
+
+# Database Configuration
+database:
+  type: "inmemory"  # Future: could be "redis", "sqlite", etc.
+  transaction:
+    max_depth: 100
+    auto_commit: false
+  storage:
+    persistence: false  # Future: could be true for file-based storage
+    backup_interval: 300  # seconds
+
+# CLI Configuration
+cli:
+  prompt: ">"
+  history_file: ".db_history"
+  auto_complete: true
+  colors: true
+
+# Development Configuration
+development:
+  debug: false
+  test_mode: false
+  mock_logger: false 
