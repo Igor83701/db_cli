@@ -2,13 +2,6 @@
 
 A command-line interface for an in-memory database with transaction support, built with Python and Click.
 
-## Features
-
-- **In-Memory Storage**: Fast key-value storage in memory
-- **Transaction Support**: Nested transactions with BEGIN, COMMIT, ROLLBACK
-- **CLI Interface**: Both interactive and command-line modes
-- **Comprehensive Logging**: All operations logged to daily log files
-- **Full Test Coverage**: Unit tests for all functionality
 
 ## Commands
 
@@ -146,23 +139,3 @@ pytest test_main.py --cov=main --cov-report=html
 2. Add CLI command with `@cli.command()`
 3. Add logging calls
 4. Write tests in `test_main.py`
-
-### Logging Levels
-
-- **DEBUG**: Detailed information for debugging
-- **INFO**: General operational messages
-- **WARNING**: Warning messages for unusual situations
-- **ERROR**: Error messages for exceptions
-
-## License
-
-This project is open source and available under the MIT License.
-
-## Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Add tests for new functionality
-5. Run the test suite
-6. Submit a pull request 

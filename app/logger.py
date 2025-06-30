@@ -74,12 +74,12 @@ class CompositeLogger:
         self.file_logger.debug(message)
 
 class NullLogger:
-    """Logger-заглушка для тестов: не выводит ничего."""
-    def info(self, message: str) -> None:
+    """Logger-заглушка для тестов и отключения логов: не выводит ничего."""
+    def info(self, message: str, *args, **kwargs) -> None:
         pass
-    def warning(self, message: str) -> None:
+    def warning(self, message: str, *args, **kwargs) -> None:
         pass
-    def error(self, message: str) -> None:
+    def error(self, message: str, *args, **kwargs) -> None:
         pass
-    def debug(self, message: str) -> None:
+    def debug(self, message: str, *args, **kwargs) -> None:
         pass 

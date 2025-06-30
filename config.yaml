@@ -6,7 +6,8 @@ app:
 
 # Logging Configuration
 logging:
-  type: "composite"  # console, file, composite
+  enabled: false  # on/off logs
+  type: "file"  # console, file, composite
   level: "INFO"  # DEBUG, INFO, WARNING, ERROR
   file:
     enabled: true

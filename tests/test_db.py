@@ -137,4 +137,17 @@ class TestInMemoryDB:
         self.db.rollback()
         assert self.db.get_transaction_depth() == 1
         self.db.rollback()
-        assert self.db.get_transaction_depth() == 0 
+        assert self.db.get_transaction_depth() == 0
+
+    def test_unset_commit_removes_key_completely(self):
+        """Unset + commit should remove key completely"""
+        self.db.set("A", "1")
+        self.db.begin()
+        self.db.set("A", "2")
+        self.db.begin()
+        self.db.unset("A")
+        assert self.db.get("A") is None  # A unset in nested transaction
+        self.db.commit()  # Commit inner transaction
+        assert self.db.get("A") is None  # Should still be None
+        self.db.commit()  # Commit outer transaction
+        assert self.db.get("A") is None  # Should still be None after all commits 

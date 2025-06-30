@@ -41,10 +41,9 @@ class TransactionManager:
         for k, v in top.items():
             if v is None:
                 # Unset - remove from all layers
-                for layer in reversed(self._layers):
+                for layer in self._layers:
                     if k in layer:
                         del layer[k]
-                        break
             else:
                 # Set - update the current layer
                 self._layers[-1][k] = v

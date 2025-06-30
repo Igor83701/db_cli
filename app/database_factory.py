@@ -2,7 +2,7 @@ from typing import Optional
 from .base import BaseDB, Database
 from .db import InMemoryDB
 from .transaction_manager import TransactionManager
-from .logger import Logger, FileLogger, ConsoleLogger, CompositeLogger
+from .logger import Logger, FileLogger, ConsoleLogger, CompositeLogger, NullLogger
 from .config import Config
 
 class DatabaseFactory:
@@ -18,7 +18,10 @@ class DatabaseFactory:
         Returns:
             Configured logger instance.
         """
-        logger_type = config.get('logging.type', 'composite')
+        if not config.get('logging.enabled', True):
+            return NullLogger()
+
+        logger_type = config.get('logging.type', 'file')
         
         if logger_type == 'console':
             return ConsoleLogger()
@@ -27,8 +30,8 @@ class DatabaseFactory:
         elif logger_type == 'composite':
             return CompositeLogger(ConsoleLogger(), FileLogger())
         else:
-            # Default to composite logger
-            return CompositeLogger(ConsoleLogger(), FileLogger())
+            # Default to file logger
+            return FileLogger()
     
     @staticmethod
     def create_transaction_manager(logger: Logger) -> TransactionManager:
